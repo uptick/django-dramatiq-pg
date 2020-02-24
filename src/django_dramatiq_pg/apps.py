@@ -22,12 +22,13 @@ class DramatiqConfig(AppConfig):
         if encoder:
             dramatiq.set_encoder(encoder())
 
-        middleware = self.get_middleware()
+        options = self.get_broker_options()
 
-        self.broker = PostgresBroker(
-            url=settings.DRAMATIQ_DATABASE_URL,
-            middleware=middleware,
-        )
+        middleware = self.get_middleware()
+        if middleware:
+            options['middleware'] = middleware
+
+        self.broker = PostgresBroker(**options)
 
         dramatiq.set_broker(self.broker)
 
@@ -37,10 +38,26 @@ class DramatiqConfig(AppConfig):
             return import_string(encoder_path)
         return None
 
+    def get_broker_options(self):
+        '''This settings is _required_'''
+        try:
+            return settings.DRAMATIQ_BROKER_OPTIONS
+        except AttributeError:
+            # Attempt compatibility with django-dramatiq
+            try:
+                return settings.DRAMATIQ_BROKER['OPTIONS']
+            except (AttributeError, KeyError):
+                raise ValueError("No setting for DRAMATIQ_BROKER_OPTIONS!")
+
     def get_middleware(self):
-        middleware_classes = getattr(settings, 'DRAMATIQ_MIDDLEWARE', None)
-        if not middleware_classes:
-            return None
+        try:
+            middleware_classes = settings.DRAMATIQ_MIDDLEWARE
+        except AttributeError:
+            try:
+            # Attempt compatibility with django-dramatiq
+                middleware_classes = settings.DRAMATIQ_BROKER['MIDDLEWARE']
+            except (AttributeError, KeyError):
+                return None
 
         middleware = [
             import_string(middleware)

@@ -26,20 +26,28 @@ INSTALLED_APPS.
 
 ## Settings
 
-In an effort to remain compatible, most setttings mirror those of
-``django-dramatiq``.
+This package attempts to retain backward compatibility with
+``django-dramatiq`` settings. It will try to fall back to using
+`DRAMATIQ_BROKER` values where possible.
 
-DRAMATIQ_DATABASE_URL:
+DRAMATIQ_BROKER_OPTIONS:
   Required!
-  URL for database to queue in.
+  A dict of options to pass when instantiating the broker.
+  The middleware will be provided from the setting below, if set.
+
+  If not set, will try ``DRAMATIQ_BROKER['OPTIONS']``.
 
 DRAMATIQ_ENCODER:
   Default: None
   Import path for encoder class.
 
+  This is compatible with ``django-dramatiq``
+
 DRAMATIQ_MIDDLEWARE:
   Default: None
   List of import paths for middleware classes.
+
+  If not set, will try ``DRAMATIQ_BROKER['MIDDLEWARE']``.
 
 DRAMATIQ_ACTORS_MODULE:
   Default: 'actors'
