@@ -1,0 +1,3 @@
+- Provide sub-class of ``dramatiq-pg.broker`` that will use Django's DATABASES
+  configuration.
+
