@@ -11,7 +11,7 @@ class DramatiqConfig(AppConfig):
     verbose_name = 'Dramatiq-PG Task Broker'
 
     def __init__(self, *args, **kwargs):
-        super(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.broker = None
 
     def ready(self):
