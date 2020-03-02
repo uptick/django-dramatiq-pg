@@ -2,7 +2,7 @@
 django_dramatiq_pg
 ==================
 
-.. rubric:: integration for django
+.. rubric:: ``dramatiq-pg`` integration for django
 
 Installation
 ------------
@@ -13,6 +13,8 @@ Installation
 
 2. Add to your INSTALLED_APPS list in settings.py
 
+   .. code-block:: python
+
     INSTALLED_APPS = [
         ...
         'django_dramatiq_pg',
@@ -20,9 +22,22 @@ Installation
 
 3. Configure the Database
 
-    DRAMATIQ_DATABASE_URL = '...'
+   .. code-block:: python
+
+    DRAMATIQ_BROKER = {
+        "OPTIONS": {
+            "url": "postgres:///mydb",
+        },
+        "MIDDLEWARE": [
+            "dramatiq.middleware.TimeLimit",
+            "dramatiq.middleware.Callbacks",
+            "dramatiq.middleware.Retries",
+        },
+    }
 
 4. Start the worker process:
+
+   .. code-block:: sh
 
     $ dramatiq django_dramatiq_pg.worker
 
