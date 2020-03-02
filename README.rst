@@ -1,6 +1,11 @@
-# dramatiq-pg integration for django
+==================
+django_dramatiq_pg
+==================
 
-## Installation
+.. rubric:: integration for django
+
+Installation
+------------
 
 1. Install with pip
 
@@ -24,7 +29,8 @@
 This worker module will auto-discover any module called 'actors' in
 INSTALLED_APPS.
 
-## Settings
+Settings
+--------
 
 This package attempts to retain backward compatibility with ``django-dramatiq``
 settings, but ingores the `BROKER` key for `DRAMATIQ_BROKER`.
