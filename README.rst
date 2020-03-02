@@ -9,7 +9,9 @@ Installation
 
 1. Install with pip
 
-    pip install django-dramatiq-pg
+   .. code-block:: sh
+
+    $ pip install django-dramatiq-pg
 
 2. Add to your INSTALLED_APPS list in settings.py
 
