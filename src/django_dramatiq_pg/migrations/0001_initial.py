@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Task',
+            name='Actor',
             fields=[
                 ('message_id', models.UUIDField(primary_key=True, serialize=False)),
                 ('queue_name', models.TextField(default='default')),

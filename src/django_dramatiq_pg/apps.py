@@ -41,27 +41,24 @@ class DramatiqConfig(AppConfig):
     def get_broker_options(self):
         '''This settings is _required_'''
         try:
-            return settings.DRAMATIQ_BROKER_OPTIONS
-        except AttributeError:
-            # Attempt compatibility with django-dramatiq
-            try:
-                return settings.DRAMATIQ_BROKER['OPTIONS']
-            except (AttributeError, KeyError):
-                raise ValueError("No setting for DRAMATIQ_BROKER_OPTIONS!")
+            return settings.DRAMATIQ_BROKER['OPTIONS']
+        except (AttributeError, KeyError):
+            raise ValueError("No setting for DRAMATIQ_BROKER_OPTIONS!")
 
     def get_middleware(self):
         try:
-            middleware_classes = settings.DRAMATIQ_MIDDLEWARE
-        except AttributeError:
-            try:
-            # Attempt compatibility with django-dramatiq
-                middleware_classes = settings.DRAMATIQ_BROKER['MIDDLEWARE']
-            except (AttributeError, KeyError):
-                return None
+            middleware_config = settings.DRAMATIQ_BROKER['MIDDLEWARE']
+        except (AttributeError, KeyError):
+            return None
 
-        middleware = [
-            import_string(middleware)
-            for middleware in middleware_classes
+        def resolve_class(name):
+            if isinstance(name, str):
+                return import_string(name)()
+            return name
+
+        middleware_list = [
+            resolve_class(middleware)
+            for middleware in middleware_config
         ]
 
-        return middleware
+        return middleware_list

@@ -26,16 +26,22 @@ INSTALLED_APPS.
 
 ## Settings
 
-This package attempts to retain backward compatibility with
-``django-dramatiq`` settings. It will try to fall back to using
-`DRAMATIQ_BROKER` values where possible.
+This package attempts to retain backward compatibility with ``django-dramatiq``
+settings, but ingores the `BROKER` key for `DRAMATIQ_BROKER`.
 
-DRAMATIQ_BROKER_OPTIONS:
-  Required!
+See https://github.com/Bogdanp/django_dramatiq for more details.
+
+DRAMATIQ_BROKER:
   A dict of options to pass when instantiating the broker.
-  The middleware will be provided from the setting below, if set.
 
-  If not set, will try ``DRAMATIQ_BROKER['OPTIONS']``.
+DRAMATIC_BROKER['OPTIONS']:
+
+  Arguments to pass to the Broker.
+
+DRAMATIC_BROKER['MIDDLEWARE']:
+
+  A list of middleware classes to be passed to the broker.
+  These can either be import strings, or instances.
 
 DRAMATIQ_ENCODER:
   Default: None
@@ -43,12 +49,7 @@ DRAMATIQ_ENCODER:
 
   This is compatible with ``django-dramatiq``
 
-DRAMATIQ_MIDDLEWARE:
-  Default: None
-  List of import paths for middleware classes.
-
-  If not set, will try ``DRAMATIQ_BROKER['MIDDLEWARE']``.
-
 DRAMATIQ_ACTORS_MODULE:
   Default: 'actors'
   Name of module use to auto-discover actors in INSTALLED_APPS.
+
