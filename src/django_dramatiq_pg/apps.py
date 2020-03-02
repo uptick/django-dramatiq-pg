@@ -42,8 +42,8 @@ class DramatiqConfig(AppConfig):
         '''This settings is _required_'''
         try:
             return settings.DRAMATIQ_BROKER['OPTIONS']
-        except (AttributeError, KeyError):
-            raise ValueError("No setting for DRAMATIQ_BROKER_OPTIONS!")
+        except KeyError:
+            raise ValueError("No OPTIONS setting for DRAMATIQ_BROKER!")
 
     def get_middleware(self):
         try:
