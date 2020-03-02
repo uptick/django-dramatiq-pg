@@ -14,7 +14,7 @@ class State(Enum):
 State.choices = tuple((state.name, state.value) for state in State)
 
 
-class Task(models.Model):
+class QueuedJob(models.Model):
     message_id = models.UUIDField(primary_key=True)
     queue_name = models.TextField(default='default')
     state = models.TextField(default=State.QUEUED, choices=State.choices)
@@ -25,6 +25,7 @@ class Task(models.Model):
 
     class Meta:
         managed = False
+        db_table = 'queue'
         indexes = (
             models.Index(fields=['state', 'mtime']),
         )

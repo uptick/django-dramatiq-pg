@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Actor',
+            name='QueuedJob',
             fields=[
                 ('message_id', models.UUIDField(primary_key=True, serialize=False)),
                 ('queue_name', models.TextField(default='default')),
@@ -25,6 +25,7 @@ class Migration(migrations.Migration):
                 ('result_ttl', models.DateTimeField()),
             ],
             options={
+                'db_table': 'queue',
                 'managed': False,
             },
         ),

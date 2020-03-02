@@ -7,7 +7,7 @@ from django.utils.module_loading import import_string
 
 
 class DramatiqConfig(AppConfig):
-    name = 'dramatiq'
+    name = 'django_dramatiq_pg'
     verbose_name = 'Dramatiq-PG Task Broker'
 
     def __init__(self, *args, **kwargs):
@@ -18,6 +18,8 @@ class DramatiqConfig(AppConfig):
         '''
         Initialise our Broker when Django is ready.
         '''
+        from . import signals
+
         encoder = self.get_encoder()
         if encoder:
             dramatiq.set_encoder(encoder())
