@@ -52,25 +52,23 @@ settings, but ingores the `BROKER` key for `DRAMATIQ_BROKER`.
 
 See https://github.com/Bogdanp/django_dramatiq for more details.
 
-DRAMATIQ_BROKER:
+DRAMATIQ_BROKER
   A dict of options to pass when instantiating the broker.
 
-DRAMATIC_BROKER['OPTIONS']:
-
+DRAMATIC_BROKER['OPTIONS']
   Arguments to pass to the Broker.
 
-DRAMATIC_BROKER['MIDDLEWARE']:
-
+DRAMATIC_BROKER['MIDDLEWARE']
   A list of middleware classes to be passed to the broker.
+
   These can either be import strings, or instances.
 
-DRAMATIQ_ENCODER:
+DRAMATIQ_ENCODER
   Default: None
+
   Import path for encoder class.
 
-  This is compatible with ``django-dramatiq``
-
-DRAMATIQ_ACTORS_MODULE:
+DRAMATIQ_ACTORS_MODULE
   Default: 'actors'
-  Name of module use to auto-discover actors in INSTALLED_APPS.
 
+  Name of module use to auto-discover actors in INSTALLED_APPS.
