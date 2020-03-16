@@ -13,7 +13,7 @@ Installation
 
     $ pip install django-dramatiq-pg
 
-2. Add to your INSTALLED_APPS list in settings.py
+2. Add to your ``INSTALLED_APPS`` list in settings.py
 
    .. code-block:: python
 
@@ -44,7 +44,7 @@ Installation
     $ dramatiq django_dramatiq_pg.worker
 
 This worker module will auto-discover any module called 'actors' in
-INSTALLED_APPS.
+``INSTALLED_APPS``.
 
 Settings
 --------
