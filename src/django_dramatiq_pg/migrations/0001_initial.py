@@ -9,27 +9,35 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='QueuedJob',
+            name="QueuedJob",
             fields=[
-                ('message_id', models.UUIDField(primary_key=True, serialize=False)),
-                ('queue_name', models.TextField(default='default')),
-                ('state', models.TextField(choices=[('QUEUED', 'queued'), ('CONSUMED', 'consumed'), ('REJECTED', 'rejected'), ('DONE', 'done')], default=django_dramatiq_pg.models.State('queued'))),
-                ('mtime', models.DateTimeField()),
-                ('message', django.contrib.postgres.fields.jsonb.JSONField()),
-                ('result', django.contrib.postgres.fields.jsonb.JSONField()),
-                ('result_ttl', models.DateTimeField()),
+                ("message_id", models.UUIDField(primary_key=True, serialize=False)),
+                ("queue_name", models.TextField(default="default")),
+                (
+                    "state",
+                    models.TextField(
+                        choices=[
+                            ("QUEUED", "queued"),
+                            ("CONSUMED", "consumed"),
+                            ("REJECTED", "rejected"),
+                            ("DONE", "done"),
+                        ],
+                        default=django_dramatiq_pg.models.State("queued"),
+                    ),
+                ),
+                ("mtime", models.DateTimeField()),
+                ("message", django.contrib.postgres.fields.jsonb.JSONField()),
+                ("result", django.contrib.postgres.fields.jsonb.JSONField()),
+                ("result_ttl", models.DateTimeField()),
             ],
-            options={
-                'db_table': 'queue',
-                'managed': False,
-            },
+            options={"db_table": "queue", "managed": False,},
         ),
-        migrations.RunSQL('''
+        migrations.RunSQL(
+            """
 CREATE SCHEMA dramatiq;
 
 CREATE TYPE dramatiq."state" AS ENUM (
@@ -54,5 +62,6 @@ CREATE TABLE dramatiq.queue(
 -- statistics when VACUUM ANALYZE is recent enough.
 CREATE INDEX ON dramatiq.queue ("state", mtime);
 CREATE INDEX ON dramatiq.queue ((message->>'actor_name'));
-        '''),
+        """
+        ),
     ]

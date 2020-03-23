@@ -1,1 +1,1 @@
-default_app_config = 'django_dramatiq_pg.apps.DramatiqConfig'
+default_app_config = "django_dramatiq_pg.apps.DramatiqConfig"
