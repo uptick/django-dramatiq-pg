@@ -11,13 +11,13 @@ class State(Enum):
     DONE = "done"
 
 
-State.choices = tuple((state.name, state.value) for state in State)
+State.choices = tuple((state.value, state.name) for state in State)
 
 
 class QueuedJob(models.Model):
     message_id = models.UUIDField(primary_key=True)
     queue_name = models.TextField(default="default")
-    state = models.TextField(default=State.QUEUED, choices=State.choices)
+    state = models.TextField(default=State.QUEUED.value, choices=State.choices)
     mtime = models.DateTimeField()  # Default = now()
     message = JSONField()
     result = JSONField()
