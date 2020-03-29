@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-dramatiq-pg"
-version = "1.0.2"
+version = "1.0.3"
 description = "Integration of Django with dramatiq-pg"
 readme = "README.rst"
 authors = ["Curtis Maloney <curtis@tinbrain.net>"]
@@ -12,6 +12,7 @@ django = ">= 2.2"
 dramatiq-pg = ">= 0.7.1"
 
 [tool.poetry.dev-dependencies]
+psycopg2 = "^2.8.4"
 
 [build-system]
 requires = ["poetry>=0.12"]
