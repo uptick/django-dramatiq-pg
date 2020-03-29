@@ -14,7 +14,7 @@ class State(Enum):
 State.choices = tuple((state.value, state.name) for state in State)
 
 
-class QueuedJob(models.Model):
+class BackgroundJob(models.Model):
     message_id = models.UUIDField(primary_key=True)
     queue_name = models.TextField(default="default")
     state = models.TextField(default=State.QUEUED.value, choices=State.choices)
