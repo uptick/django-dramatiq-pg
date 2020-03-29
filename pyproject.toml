@@ -5,6 +5,7 @@ description = "Integration of Django with dramatiq-pg"
 readme = "README.rst"
 authors = ["Curtis Maloney <curtis@tinbrain.net>"]
 license = "MIT"
+homepage = https://github.com/uptick/django-dramatiq-pg
 
 [tool.poetry.dependencies]
 python = "^3.7"
