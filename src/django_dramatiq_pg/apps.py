@@ -8,7 +8,7 @@ from django.utils.module_loading import import_string
 
 class DramatiqConfig(AppConfig):
     name = "django_dramatiq_pg"
-    verbose_name = "Dramatiq-PG Task Broker"
+    verbose_name = "Dramatiq-PG"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
