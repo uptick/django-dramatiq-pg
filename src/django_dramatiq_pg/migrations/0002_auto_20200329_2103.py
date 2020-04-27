@@ -7,9 +7,9 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('django_dramatiq_pg', '0001_initial'),
+        ("django_dramatiq_pg", "0001_initial"),
     ]
 
     operations = [
-        migrations.RenameModel('QueuedJob', 'BackgroundJob'),
+        migrations.RenameModel("QueuedJob", "BackgroundJob"),
     ]
