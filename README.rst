@@ -34,7 +34,7 @@ Installation
             "dramatiq.middleware.TimeLimit",
             "dramatiq.middleware.Callbacks",
             "dramatiq.middleware.Retries",
-        },
+        ],
     }
 
 4. Start the worker process:
