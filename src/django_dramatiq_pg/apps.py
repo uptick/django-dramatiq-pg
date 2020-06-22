@@ -6,6 +6,34 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 
 
+class DummyBroker:
+    '''
+    A dummy broker for tasks to register with until we register our broker.
+
+    Otherwise, the `@actor` decorator will call `get_broker` before we're
+    ready, and grab the default `RabbitmqBroker` instead.
+    '''
+    __actors__ = []
+
+    actor_options = set()
+
+    @classmethod
+    def declare_actor(cls, actor):
+        cls.__actors__.append(actor)
+
+    @classmethod
+    def replay(cls, broker):
+        for actor in cls.__actors__:
+            invalid_options = set(actor.options) - broker.actor_options
+            if invalid_options:
+                raise ValueError(
+                    f'Actor {actor} declared with invalid options: {invalid_options}'
+                )
+            broker.declare_actor(actor)
+
+dramatiq.set_broker(DummyBroker)
+
+
 class DramatiqConfig(AppConfig):
     name = "django_dramatiq_pg"
     verbose_name = "Dramatiq-PG"
@@ -33,6 +61,8 @@ class DramatiqConfig(AppConfig):
         self.broker = PostgresBroker(**options)
 
         dramatiq.set_broker(self.broker)
+
+        DummyBroker.replay(self.broker)
 
     def get_encoder(self):
         encoder_path = getattr(settings, "DRAMATIQ_ENCODER", None)
