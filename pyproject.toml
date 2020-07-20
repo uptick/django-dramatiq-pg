@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-dramatiq-pg"
-version = "1.0.5"
+version = "1.1.0"
 description = "Integration of Django with dramatiq-pg"
 readme = "README.rst"
 authors = ["Curtis Maloney <curtis@tinbrain.net>"]
