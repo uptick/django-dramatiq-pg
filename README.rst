@@ -49,11 +49,6 @@ This worker module will auto-discover any module called 'actors' in
 Settings
 --------
 
-This package attempts to retain backward compatibility with ``django-dramatiq``
-settings, but ingores the `BROKER` key for `DRAMATIQ_BROKER`.
-
-See https://github.com/Bogdanp/django_dramatiq for more details.
-
 DRAMATIQ_BROKER
   A dict of options to pass when instantiating the broker.
 
@@ -74,3 +69,12 @@ DRAMATIQ_ACTORS_MODULE
   Default: 'actors'
 
   Name of module use to auto-discover actors in INSTALLED_APPS.
+
+DRAMATIQ_REGISTRY
+
+  Import path for the task Registry instance.
+
+  This should refer to an instance of `django_dramatiq_pg.registry.Registry`.
+
+  This resolves the chicken/egg problem of declaring tasks before the broker is
+  configured.

@@ -34,6 +34,10 @@ class DramatiqConfig(AppConfig):
 
         dramatiq.set_broker(self.broker)
 
+        self.registry = self.get_registry()
+
+        self.registry.bind_broker(self.broker)
+
     def get_encoder(self):
         encoder_path = getattr(settings, "DRAMATIQ_ENCODER", None)
         if encoder_path:
@@ -61,3 +65,13 @@ class DramatiqConfig(AppConfig):
         middleware_list = [resolve_class(middleware) for middleware in middleware_config]
 
         return middleware_list
+
+    def get_registry(self):
+        """Import (or create) the Task Registry"""
+        try:
+            registry = import_string(settings.DRAMATIQ_REGISTRY)
+        except AttributeError:
+            from .registry import Registry
+            registry = Registry()
+
+        return registry
