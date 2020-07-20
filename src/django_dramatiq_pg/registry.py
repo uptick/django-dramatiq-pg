@@ -2,20 +2,24 @@ try:
     from dramatiq.registry import Registry
 
 except ImportError:
+    from dramatiq.actor import Actor, _queue_name_re
 
     class Registry:
         """
-        A Registry allows defining a collection of Actors not directly bound to a Broker.
+        A Registry allows defining a collection of Actors not directly bound
+        to a Broker.
 
         This allows your code to declar Actors before configuring a Broker.
         """
+
         def __init__(self):
             self.actors = {}
             self.broker = None
 
         def actor(self, fn=None, *, actor_class=Actor, actor_name=None, queue_name="default", priority=0, **options):
             """
-            Mimics `actor.actor` decorator, but skips the actor options check, and passes `self` as broker.
+            Mimics `actor.actor` decorator, but skips the actor options check,
+            and passes `self` as broker.
             """
 
             def decorator(fn):
@@ -58,10 +62,10 @@ except ImportError:
                 invalid_options = set(actor.options) - broker.actor_options
                 if invalid_options:
                     invalid_options_list = ", ".join(invalid_options)
-                    raise ValueError((
-                        "Actor %s specified the following options which are not "
-                        "supported by this broker: %s. Did you forget to add a "
-                        "middleware to your Broker?"
-                    ) % (actor_name, invalid_options_list))
+                    raise ValueError(
+                        "Actor %s specified the following options which are "
+                        "not supported by this broker: %s. Did you forget to "
+                        " add a middleware to your Broker?" % (actor_name, invalid_options_list)
+                    )
 
                 broker.declar_actor(actor)

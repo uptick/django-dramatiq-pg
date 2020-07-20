@@ -72,6 +72,7 @@ class DramatiqConfig(AppConfig):
             registry = import_string(settings.DRAMATIQ_REGISTRY)
         except AttributeError:
             from .registry import Registry
+
             registry = Registry()
 
         return registry
