@@ -68,4 +68,4 @@ except ImportError:
                         " add a middleware to your Broker?" % (actor_name, invalid_options_list)
                     )
 
-                broker.declar_actor(actor)
+                broker.declare_actor(actor)
