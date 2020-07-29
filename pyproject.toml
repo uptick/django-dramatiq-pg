@@ -9,7 +9,7 @@ homepage = "https://github.com/uptick/django-dramatiq-pg"
 
 [tool.poetry.dependencies]
 python = "^3.7"
-django = ">= 2.2"
+django = ">= 3.0"
 dramatiq-pg = ">= 0.8.0"
 
 [tool.poetry.dev-dependencies]
