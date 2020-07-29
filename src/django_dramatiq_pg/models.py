@@ -5,7 +5,7 @@ from django.utils import timezone
 
 class BackgroundJob(models.Model):
 
-    class STATUS(models.TextChoices):
+    class STATE(models.TextChoices):
         QUEUED = "queued"
         CONSUMED = "consumed"
         REJECTED = "rejected"
@@ -13,7 +13,7 @@ class BackgroundJob(models.Model):
 
     message_id = models.UUIDField(primary_key=True)
     queue_name = models.TextField(default="default")
-    state = models.CharField(max_length=16, default=STATUS.QUEUED, choices=STATUS.choices)
+    state = models.CharField(max_length=16, default=STATE.QUEUED, choices=STATE.choices)
     mtime = models.DateTimeField(default=timezone.now)
     message = JSONField(blank=True, null=True)
     result = JSONField(blank=True, null=True)
