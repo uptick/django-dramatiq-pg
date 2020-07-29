@@ -20,10 +20,10 @@ class Migration(migrations.Migration):
                     "state",
                     models.TextField(
                         choices=[
-                            ("QUEUED", "queued"),
-                            ("CONSUMED", "consumed"),
-                            ("REJECTED", "rejected"),
-                            ("DONE", "done"),
+                            ('queued', 'Queued'),
+                            ('consumed', 'Consumed'),
+                            ('rejected', 'Rejected'),
+                            ('done', 'Done'),
                         ],
                         default="queued",
                     ),
@@ -33,7 +33,7 @@ class Migration(migrations.Migration):
                 ("result", django.contrib.postgres.fields.jsonb.JSONField()),
                 ("result_ttl", models.DateTimeField()),
             ],
-            options={"db_table": "queue", "managed": False,},
+            options={"db_table": "queue", "managed": False},
         ),
         migrations.RunSQL(
             """

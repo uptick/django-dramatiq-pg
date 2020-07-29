@@ -12,7 +12,7 @@ class BackgroundJob(models.Model):
         DONE = "done"
 
     message_id = models.UUIDField(primary_key=True)
-    # queue_name = models.TextField(default="default")
+    queue_name = models.TextField(default="default")
     state = models.CharField(max_length=16, default=STATUS.QUEUED, choices=STATUS.choices)
     mtime = models.DateTimeField(default=timezone.now)
     message = JSONField(blank=True, null=True)
@@ -20,6 +20,6 @@ class BackgroundJob(models.Model):
     result_ttl = models.DateTimeField()
 
     class Meta:
-        # managed = False
+        managed = False
         db_table = "queue"
         indexes = (models.Index(fields=["state", "mtime"]),)
