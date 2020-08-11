@@ -1,11 +1,20 @@
 [tool.poetry]
 name = "django-dramatiq-pg"
-version = "1.1.0"
+version = "1.2.0"
 description = "Integration of Django with dramatiq-pg"
 readme = "README.rst"
 authors = ["Curtis Maloney <curtis@tinbrain.net>"]
 license = "MIT"
 homepage = "https://github.com/uptick/django-dramatiq-pg"
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Framework :: Django",
+  "Framework :: Django :: 3.0",
+  "Framework :: Django :: 3.1",
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"

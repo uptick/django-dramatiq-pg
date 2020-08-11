@@ -3,8 +3,8 @@ CHANGELOG
 =========
 
 
-1.2.0 (development)
+1.2.0
 ===================
 
 + BackgroundJob now uses Django's TextChoices instead of a custom enum
-- Removed support for Django <=2.2
+- Removed support for Django <3.0
