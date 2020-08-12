@@ -2,6 +2,12 @@
 django_dramatiq_pg
 ==================
 
+.. image:: https://badge.fury.io/py/django-dramatiq-pg.svg
+    :target: https://pypi.org/project/django-dramatiq-pg
+
+.. image:: https://img.shields.io/pypi/pyversions/django-dramatiq-pg.svg
+    :target: https://pypi.org/project/django-dramatiq-pg
+
 .. rubric:: ``dramatiq-pg`` integration for django
 
 Installation
