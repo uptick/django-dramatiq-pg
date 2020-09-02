@@ -58,7 +58,7 @@ Installation
             "dramatiq.middleware.Retries",
         ],
     }
-    DRAMATIC_REGISTRY = 'myapp.registry.tasks'
+    DRAMATIQ_REGISTRY = 'myapp.registry.tasks'
 
 5. Start the worker process:
 
