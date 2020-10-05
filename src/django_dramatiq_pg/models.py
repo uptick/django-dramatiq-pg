@@ -1,10 +1,8 @@
-from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils import timezone
 
 
 class BackgroundJob(models.Model):
-
     class STATE(models.TextChoices):
         QUEUED = "queued"
         CONSUMED = "consumed"
@@ -15,8 +13,8 @@ class BackgroundJob(models.Model):
     queue_name = models.TextField(default="default")
     state = models.CharField(max_length=16, default=STATE.QUEUED, choices=STATE.choices)
     mtime = models.DateTimeField(default=timezone.now)
-    message = JSONField(blank=True, null=True)
-    result = JSONField(blank=True, null=True)
+    message = models.JSONField(blank=True, null=True)
+    result = models.JSONField(blank=True, null=True)
     result_ttl = models.DateTimeField()
 
     class Meta:
