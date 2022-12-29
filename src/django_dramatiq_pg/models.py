@@ -19,5 +19,5 @@ class BackgroundJob(models.Model):
 
     class Meta:
         managed = False
-        db_table = "queue"
+        db_table = '"dramatiq"."queue"'
         indexes = (models.Index(fields=["state", "mtime"]),)
