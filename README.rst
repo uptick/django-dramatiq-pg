@@ -31,7 +31,16 @@ Installation
         'django_dramatiq_pg',
     ]
 
-3. Create a Registry, and register your tasks
+3. Add database router in settings.py if you support multiple databases
+
+   .. code-block:: python
+
+    DATABASE_ROUTERS = [
+        ...
+        'django_dramatiq_pg.router.Router',
+    ]
+
+4. Create a Registry, and register your tasks
 
    .. code-block:: python
 
@@ -44,14 +53,12 @@ Installation
      def mytask():
          ...
 
-4. Configure
+5. Configure
 
    .. code-block:: python
 
     DRAMATIQ_BROKER = {
-        "OPTIONS": {
-            "url": "postgres:///mydb",
-        },
+        "DATABASE_ALIAS": "default",
         "MIDDLEWARE": [
             "dramatiq.middleware.TimeLimit",
             "dramatiq.middleware.Callbacks",
@@ -95,8 +102,8 @@ Settings
 DRAMATIQ_BROKER
   A dict of options to pass when instantiating the broker.
 
-DRAMATIC_BROKER['OPTIONS']
-  Arguments to pass to the Broker.
+DRAMATIC_BROKER['DATABASE_ALIAS']
+  The alias to the connection in `DATABASES` to be used by broker
 
 DRAMATIC_BROKER['MIDDLEWARE']
   A list of middleware classes to be passed to the broker.
